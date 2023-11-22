@@ -1,8 +1,8 @@
-import getUsers from "@/lib/users";
+import getProduct from "@/lib/product";
 
 export function GET() {
-    let users = getUsers();
-    return Response.json(users)
+    let product = getProduct();
+    return Response.json(product)
 }
 
 
@@ -12,11 +12,11 @@ export async function POST(request) {
     if (content != 'application/json')
         return Response.json({ message: 'Debes proporcionar datos JSON' })
 
-    let users = getUsers();
-    let sig = Math.max(...users.map(u => u.id)) + 1
+    let product = getProduct();
+    let sig = Math.max(...product.map(u => u.id)) + 1
 
     const newUser = await request.json()
-    users.push({ id: sig, ...newUser })
-    return Response.json(users)
+    product.push({ id: sig, ...newUser })
+    return Response.json(product)
 }
 
